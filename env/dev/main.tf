@@ -19,11 +19,11 @@ module "network" {
 module "EC2" {
   source = "../.."
 
-  general_config = var.general_config
+  general_config   = var.general_config
   public_subnet_1a = var.public_subnet_1a
   public_subnet_1c = var.public_subnet_1c
-  key_name = var.keyname
-  instance_type = var.instance_type
-  volume_type = var.volume_type
-  volume_size = var.volume_size
+  key_name         = var.keyname
+  instance_type    = var.instance_type
+  volume_type      = var.volume_type
+  volume_size      = var.volume_size
 }
