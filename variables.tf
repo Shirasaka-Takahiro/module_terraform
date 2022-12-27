@@ -10,7 +10,7 @@ variable "public_subnet_1c" {}
 variable "private_subnet_1a" {}
 variable "private_subnet_1c" {}
 variable "ami" {}
-variable "instaince_type" {}
+variable "instance_type" {}
 variable "volume_type" {}
 variable "volume_size" {}
 variable "key_name" {}

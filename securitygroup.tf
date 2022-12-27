@@ -11,7 +11,7 @@ resource "aws_security_group" "common" {
   }
 
   tags = {
-    Name = "${var.general_config["project"]}-${var.general_config["environment"]}-common-sg"
+    Name = "${var.general_config["project"]}-${var.general_config["env"]}-common-sg"
   }
 }
 
@@ -36,6 +36,6 @@ resource "aws_security_group" "ec2" {
   }
 
   tags = {
-    Name = "${var.general_config["project"]}-${var.general_config["environment"]}-ec2-sg"
+    Name = "${var.general_config["project"]}-${var.general_config["env"]}-ec2-sg"
   }
 }
