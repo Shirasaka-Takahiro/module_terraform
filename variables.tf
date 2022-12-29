@@ -1,13 +1,10 @@
 variable "general_config" {
   type = map(any)
 }
-variable "availability_zone_1a" {}
-variable "availability_zone_1c" {}
 variable "vpc_cidr" {}
-variable "public_subnet_1a" {}
-variable "public_subnet_1c" {}
-variable "private_subnet_1a" {}
-variable "private_subnet_1c" {}
+variable "availability_zones" {}
+variable "public_subnets" {}
+variable "private_subnets" {}
 variable "ami" {}
 variable "instance_type" {}
 variable "volume_type" {}

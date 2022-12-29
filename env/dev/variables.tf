@@ -8,32 +8,64 @@ variable "general_config" {
 }
 
 ##Network
-variable "availability_zone_1a" {
-  default = "ap-northeast-1a"
-}
-
-variable "availability_zone_1c" {
-  default = "ap-northeast-1c"
+variable "vpc" {
+  description = "CIDR BLOCK for VPC"
+  type        = string
+  default     = "10.0.0.0/16"
 }
 
 variable "vpc_cidr" {
   default = "10.0.0.0/16"
 }
 
-variable "public_subnet_1a" {
-  default = "10.0.10.0/24"
+variable "availability_zones" {
+  type = map(any)
+  default = {
+    availability_zones = {
+      az-1a = {
+        az = "ap-northeast-1a"
+      },
+      az-1c = {
+        az = "ap-northeast-1c"
+      }
+    }
+  }
 }
 
-variable "public_subnet_1c" {
-  default = "10.0.30.0/24"
+variable "public_subnets" {
+  type = map(any)
+  default = {
+    subnets = {
+      public-1a = {
+        name = "public-1a",
+        cidr = "10.0.10.0/24",
+        az   = "ap-northeast-1a"
+      },
+      public-1c = {
+        name = "public-1c",
+        cidr = "10.0.30.0/24",
+        az   = "ap-northeast-1c"
+      }
+    }
+  }
 }
 
-variable "private_subnet_1a" {
-  default = "10.0.20.0/24"
-}
-
-variable "private_subnet_1c" {
-  default = "10.0.40.0/24"
+variable "private_subnets" {
+  type = map(any)
+  default = {
+    subnets = {
+      private-1a = {
+        name = "private-1a"
+        cidr = "10.0.20.0/24"
+        az   = "ap-northeast-1a"
+      },
+      private-1c = {
+        name = "private-1c"
+        cidr = "10.0.40.0/24"
+        az   = "ap-northeast-1c"
+      }
+    }
+  }
 }
 
 ##EC2
