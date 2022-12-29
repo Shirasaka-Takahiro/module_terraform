@@ -1,7 +1,7 @@
 ##EC2
 resource "aws_instance" "ec2_01" {
   ami       = var.ami
-  subnet_id = var.public_subnet_1a
+  subnet_id = aws_subnet.public_subnet_1a.id
   vpc_security_group_ids = [
     aws_security_group.common.id,
     aws_security_group.ec2.id
@@ -21,7 +21,7 @@ resource "aws_instance" "ec2_01" {
 ##EC2
 resource "aws_instance" "ec2_02" {
   ami       = var.ami
-  subnet_id = var.public_subnet_1c
+  subnet_id = aws_subnet.public_subnet_1c.id
   vpc_security_group_ids = [
     aws_security_group.common.id,
     aws_security_group.ec2.id

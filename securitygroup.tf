@@ -4,7 +4,7 @@ resource "aws_security_group" "common" {
 
   ##internal
   ingress {
-    cidr_blocks = ["${var.vpc}"]
+    cidr_blocks = ["${var.vpc_cidr}"]
     from_port   = 0
     to_port     = 0
     protocol    = "-1"

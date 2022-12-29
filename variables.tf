@@ -3,7 +3,6 @@ variable "general_config" {
 }
 variable "availability_zone_1a" {}
 variable "availability_zone_1c" {}
-variable "vpc" {}
 variable "vpc_cidr" {}
 variable "public_subnet_1a" {}
 variable "public_subnet_1c" {}
