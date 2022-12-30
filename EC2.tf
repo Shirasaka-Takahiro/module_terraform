@@ -1,18 +1,7 @@
-##Number for identiying instance
-locals {
-  list = [
-    1,
-    2,
-    3,
-    4,
-    5
-  ]
-}
-
 ##EC2
 resource "aws_instance" "ec2" {
   ami       = var.ami
-  for_each = var.public_subnets.subnets
+  for_each  = var.public_subnets.subnets
   subnet_id = aws_subnet.public_subnets[each.key].id
   vpc_security_group_ids = [
     aws_security_group.common.id,
@@ -26,7 +15,7 @@ resource "aws_instance" "ec2" {
   }
 
   tags = {
-    Name = "${var.general_config["project"]}-${var.general_config["env"]}-web0"
+    Name = "${var.general_config["project"]}-${var.general_config["env"]}-${var.instance_role}0${substr(each.value.az, -2, 1)}"
   }
 }
 
@@ -37,7 +26,7 @@ resource "aws_eip" "eip_ec2" {
   instance = each.value.id
 
   tags = {
-    Name = "${var.general_config["project"]}-${var.general_config["env"]}-eip-web01"
+    Name = "${var.general_config["project"]}-${var.general_config["env"]}-eip01"
   }
 }
 

@@ -6,6 +6,7 @@ variable "availability_zones" {}
 variable "public_subnets" {}
 variable "private_subnets" {}
 variable "ami" {}
+variable "instance_role" {}
 variable "instance_type" {}
 variable "volume_type" {}
 variable "volume_size" {}

@@ -69,6 +69,10 @@ variable "private_subnets" {
 }
 
 ##EC2
+variable "instance_role" {
+  description = "role of instance"
+}
+
 variable "ami" {
   description = "ID of AMI to use for ec2 instance"
   default     = "ami-0bba69335379e17f8"

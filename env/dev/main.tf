@@ -13,6 +13,7 @@ module "dev" {
   private_subnets    = var.private_subnets
   ami                = var.ami
   key_name           = var.key_name
+  instance_role      = var.instance_role
   instance_type      = var.instance_type
   volume_type        = var.volume_type
   volume_size        = var.volume_size
