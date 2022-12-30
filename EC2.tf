@@ -1,8 +1,8 @@
 ##EC2
 resource "aws_instance" "ec2" {
-  ami       = var.ami
-  for_each  = var.public_subnets.subnets
-  subnet_id = aws_subnet.public_subnets[each.key].id
+  ami = var.ami
+  count     = length(var.public_subnets.subnets)
+  subnet_id = element(values(aws_subnet.public_subnets)[*].id, count.index % 2)
   vpc_security_group_ids = [
     aws_security_group.common.id,
     aws_security_group.ec2.id
@@ -15,18 +15,18 @@ resource "aws_instance" "ec2" {
   }
 
   tags = {
-    Name = "${var.general_config["project"]}-${var.general_config["env"]}-${var.instance_role}0${substr(each.value.az, -2, 1)}"
+    Name = "${var.general_config["project"]}-${var.general_config["env"]}-0${format("${var.instance_role}%02d", count.index + 1)}"
   }
 }
 
 ##Elastic IP
 resource "aws_eip" "eip_ec2" {
-  vpc      = true
-  for_each = aws_instance.ec2
-  instance = each.value.id
+  vpc = true
+  count = length(aws_instance.ec2)
+  instance = element(aws_instance.ec2.*.id, count.index % 2)
 
   tags = {
-    Name = "${var.general_config["project"]}-${var.general_config["env"]}-eip01"
+    Name = "${var.general_config["project"]}-${var.general_config["env"]}-eip0${format("%02d", count.index + 1)}"
   }
 }
 
