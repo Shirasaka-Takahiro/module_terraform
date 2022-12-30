@@ -11,3 +11,5 @@ variable "instance_type" {}
 variable "volume_type" {}
 variable "volume_size" {}
 variable "key_name" {}
+variable "public_subnet_ids" {}
+variable "instance_ids" {}

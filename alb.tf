@@ -1,20 +1,20 @@
 ##ALB
 resource "aws_lb" "alb" {
-  name               = "${var.general_config["project"]}-${var.general_config["environment"]}-alb"
+  name               = "${var.general_config["project"]}-${var.general_config["env"]}-alb"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb.id]
-  subnets            = [aws_subnet.public-subnets["public-1a"].id, aws_subnet.public-subnets["public-1c"].id]
+  subnets            = var.public_subnet_ids
   ip_address_type    = "ipv4"
 
   tags = {
-    Name = "${var.general_config["project"]}-${var.general_config["environment"]}-alb"
+    Name = "${var.general_config["project"]}-${var.general_config["env"]}-alb"
   }
 }
 
 ##Target Group
 resource "aws_lb_target_group" "tg" {
-  name             = "${var.general_config["project"]}-${var.general_config["environment"]}-tg"
+  name             = "${var.general_config["project"]}-${var.general_config["env"]}-tg"
   target_type      = "instance"
   protocol_version = "HTTP1"
   port             = "80"
@@ -33,15 +33,16 @@ resource "aws_lb_target_group" "tg" {
   }
 
   tags = {
-    Name = "${var.general_config["project"]}-${var.general_config["environment"]}-tg"
+    Name = "${var.general_config["project"]}-${var.general_config["env"]}-tg"
   }
 }
 
 ##Attach target group to the alb
 resource "aws_lb_target_group_attachment" "tg-to-ec2" {
-  for_each         = aws_instance.ec2-instance
-  target_id        = each.value.id
+  count = length(var.instance_ids)
+  target_id        = element(var.instance_ids, count.index % 2)
   target_group_arn = aws_lb_target_group.tg.arn
+  port = 80
 }
 
 ##Listener
