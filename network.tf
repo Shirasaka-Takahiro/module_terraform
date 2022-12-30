@@ -18,7 +18,7 @@ resource "aws_subnet" "public_subnets" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.general_config["project"]}-${var.general_config["env"]}-public-${substr(each.value.az, -1, 1)}"
+    Name = "${var.general_config["project"]}-${var.general_config["env"]}-public-${substr(each.value.az, -1, 2)}"
   }
 }
 
@@ -30,7 +30,7 @@ resource "aws_subnet" "private_subnets" {
   availability_zone = each.value.az
 
   tags = {
-    Name = "${var.general_config["project"]}-${var.general_config["env"]}-private-${substr(each.value.az, -1, 1)}"
+    Name = "${var.general_config["project"]}-${var.general_config["env"]}-private-${substr(each.value.az, -1, 2)}"
   }
 }
 
@@ -50,7 +50,7 @@ resource "aws_route_table" "public_route_tables" {
   for_each = var.public_subnets.subnets
 
   tags = {
-    Name = "${var.general_config["project"]}-${var.general_config["env"]}-pubic-rtb-${substr(each.value.az, -1, 1)}"
+    Name = "${var.general_config["project"]}-${var.general_config["env"]}-pubic-rtb-${substr(each.value.az, -1, 2)}"
   }
 }
 
@@ -75,7 +75,7 @@ resource "aws_route_table" "private_route_tables" {
   for_each = var.private_subnets.subnets
 
   tags = {
-    Name = "${var.general_config["project"]}-${var.general_config["env"]}-private-rtb-${substr(each.value.az, -1, 1)}"
+    Name = "${var.general_config["project"]}-${var.general_config["env"]}-private-rtb-${substr(each.value.az, -1, 2)}"
   }
 }
 
