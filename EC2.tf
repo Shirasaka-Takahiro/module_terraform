@@ -1,6 +1,6 @@
 ##EC2
 resource "aws_instance" "ec2" {
-  ami = var.ami
+  ami       = var.ami
   count     = length(var.public_subnets.subnets)
   subnet_id = element(values(aws_subnet.public_subnets)[*].id, count.index % 2)
   vpc_security_group_ids = [
@@ -21,8 +21,8 @@ resource "aws_instance" "ec2" {
 
 ##Elastic IP
 resource "aws_eip" "eip_ec2" {
-  vpc = true
-  count = length(aws_instance.ec2)
+  vpc      = true
+  count    = length(aws_instance.ec2)
   instance = element(aws_instance.ec2.*.id, count.index % 2)
 
   tags = {

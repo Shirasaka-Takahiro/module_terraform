@@ -39,10 +39,10 @@ resource "aws_lb_target_group" "tg" {
 
 ##Attach target group to the alb
 resource "aws_lb_target_group_attachment" "tg-to-ec2" {
-  count = length(var.instance_ids)
+  count            = length(var.instance_ids)
   target_id        = element(var.instance_ids, count.index % 2)
   target_group_arn = aws_lb_target_group.tg.arn
-  port = 80
+  port             = 80
 }
 
 ##Listener
