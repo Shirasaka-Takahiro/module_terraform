@@ -13,3 +13,7 @@ output "private_subnet_ids" {
 output "instance_ids" {
   value = aws_instance.ec2.*.id
 }
+
+output "public_ip" {
+  value = aws_eip.eip_ec2.*.public_ip
+}

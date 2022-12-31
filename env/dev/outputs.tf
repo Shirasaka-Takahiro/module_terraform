@@ -13,3 +13,7 @@ output "privatesubnet_ids" {
 output "instance_ids" {
   value = module.dev.instance_ids
 }
+
+output "public_ip" {
+  value = module.dev.public_ip
+}
