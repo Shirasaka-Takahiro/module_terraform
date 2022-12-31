@@ -37,15 +37,7 @@ resource "aws_lb_target_group" "tg" {
   }
 }
 
-##Attach target group to the alb
-resource "aws_lb_target_group_attachment" "tg-to-ec2" {
-  count            = length(var.instance_ids)
-  target_id        = element(var.instance_ids, count.index % 2)
-  target_group_arn = aws_lb_target_group.tg.arn
-  port             = 80
-}
-
-##Listener
+##HTTP Listener
 resource "aws_lb_listener" "alb-listener" {
   load_balancer_arn = aws_lb.alb.arn
   port              = "80"
@@ -55,4 +47,26 @@ resource "aws_lb_listener" "alb-listener" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.tg.arn
   }
+}
+
+##HTTPS Listener
+resource "aws_alb_listener" "alb_https" {
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = aws_acm_certificate.cert.arn
+
+  default_action {
+    target_group_arn = aws_lb_target_group.tg.arn
+    type             = "forward"
+  }
+}
+
+##Attach target group to the alb
+resource "aws_lb_target_group_attachment" "tg-to-ec2" {
+  count            = length(var.instance_ids)
+  target_id        = element(var.instance_ids, count.index % 2)
+  target_group_arn = aws_lb_target_group.tg.arn
+  port             = 80
 }

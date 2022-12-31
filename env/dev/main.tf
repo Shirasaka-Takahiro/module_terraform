@@ -19,6 +19,6 @@ module "dev" {
   volume_type        = var.volume_type
   volume_size        = var.volume_size
   instance_ids       = module.dev.instance_ids
-  zone_name          = var.zone_name
-  sub_domain         = var.sub_domain
+  #zone_name          = var.zone_name
+  sub_domain = var.sub_domain
 }

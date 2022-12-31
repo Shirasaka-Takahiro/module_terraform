@@ -15,7 +15,7 @@ resource "aws_instance" "ec2" {
   }
 
   tags = {
-    Name = "${var.general_config["project"]}-${var.general_config["env"]}-0${format("${var.instance_role}%02d", count.index + 1)}"
+    Name = "${var.general_config["project"]}-${var.general_config["env"]}-${format("${var.instance_role}%02d", count.index + 1)}"
   }
 }
 
