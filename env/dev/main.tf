@@ -32,4 +32,5 @@ module "dev" {
   storage_type         = var.storage_type
   allocated_storage    = var.allocated_storage
   multi_az             = var.multi_az
+  sns_email = var.sns_email
 }

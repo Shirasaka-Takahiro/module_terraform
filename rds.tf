@@ -84,7 +84,7 @@ resource "aws_db_instance" "mysql_db_instance" {
   copy_tags_to_snapshot               = true
   storage_encrypted                   = true
   performance_insights_enabled        = false
-  maintenance_window                  = "Wed:20:00-Sat:21:00"
+  maintenance_window                  = "Wed:20:00-Wed:21:00"
   deletion_protection                 = false
   skip_final_snapshot                 = true
   apply_immediately                   = false

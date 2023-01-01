@@ -171,3 +171,8 @@ variable "multi_az" {
   type        = string
   default     = "true"
 }
+
+##SNS email address
+variable "sns_email" {
+  description = "sns email"
+}

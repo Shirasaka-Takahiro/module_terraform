@@ -26,3 +26,4 @@ variable "instance_class" {}
 variable "storage_type" {}
 variable "allocated_storage" {}
 variable "multi_az" {}
+variable "sns_email" {}
