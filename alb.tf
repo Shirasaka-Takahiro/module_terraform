@@ -7,6 +7,12 @@ resource "aws_lb" "alb" {
   subnets            = var.public_subnet_ids
   ip_address_type    = "ipv4"
 
+  access_logs {
+    bucket  = aws_s3_bucket.bucket_alb_access_log.id
+    prefix  = var.general_config["project"]
+    enabled = true
+  }
+
   tags = {
     Name = "${var.general_config["project"]}-${var.general_config["env"]}-alb"
   }

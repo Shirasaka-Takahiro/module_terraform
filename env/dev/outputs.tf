@@ -17,3 +17,7 @@ output "instance_ids" {
 output "public_ip" {
   value = module.dev.public_ip
 }
+
+output "rds_endpoint" {
+  value = module.dev.rds_endpoint
+}

@@ -17,3 +17,7 @@ output "instance_ids" {
 output "public_ip" {
   value = aws_eip.eip_ec2.*.public_ip
 }
+
+output "rds_endpoint" {
+  value = aws_db_instance.rds_db_instance.endpoint
+}
