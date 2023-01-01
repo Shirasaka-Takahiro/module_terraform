@@ -27,3 +27,6 @@ variable "storage_type" {}
 variable "allocated_storage" {}
 variable "multi_az" {}
 variable "sns_email" {}
+variable "cwa_actions" {}
+variable "cwa_threshold_rds_freeablememory" {}
+variable "cwa_threshold_rds_freeablestorage" {}

@@ -176,3 +176,25 @@ variable "multi_az" {
 variable "sns_email" {
   description = "sns email"
 }
+
+##Cloud Watch Alearm Actions
+variable "cwa_actions" {
+  description = "Cloud watch alearm actions"
+  type        = string
+  default     = "false"
+}
+
+##Cloud Watch Threshold
+variable "cwa_threshold_rds_freeablememory" {
+  description = "threshold of freeable memory on rds"
+  type        = number
+  #3.3GB
+  default = 3543348019
+}
+
+variable "cwa_threshold_rds_freeablestorage" {
+  description = "threshold of freeable storage on rds"
+  type        = number
+  #17GB
+  default = 18253611008
+}

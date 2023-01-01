@@ -1,5 +1,5 @@
 ##Subnet Group
-resource "aws_db_subnet_group" "mysql_subnet_group" {
+resource "aws_db_subnet_group" "rds_subnet_group" {
   name       = "${var.general_config["project"]}-${var.general_config["env"]}-subnet-group"
   subnet_ids = var.private_subnet_ids
 
@@ -9,7 +9,7 @@ resource "aws_db_subnet_group" "mysql_subnet_group" {
 }
 
 ##Parameter Group
-resource "aws_db_parameter_group" "mysql_parameter_group" {
+resource "aws_db_parameter_group" "rds_parameter_group" {
   name   = "${var.general_config["project"]}-${var.general_config["env"]}-parameter-group"
   family = "mysql8.0"
 
@@ -52,14 +52,14 @@ resource "aws_db_parameter_group" "mysql_parameter_group" {
 }
 
 ##Option Group
-resource "aws_db_option_group" "mysql_option_group" {
+resource "aws_db_option_group" "rds_option_group" {
   name                 = "${var.general_config["project"]}-${var.general_config["env"]}-option-group"
   engine_name          = var.engine_name
   major_engine_version = var.major_engine_version
 }
 
 ##DB Instance
-resource "aws_db_instance" "mysql_db_instance" {
+resource "aws_db_instance" "rds_db_instance" {
   engine                              = var.engine
   engine_version                      = var.engine_version
   license_model                       = "general-public-license"
@@ -70,14 +70,14 @@ resource "aws_db_instance" "mysql_db_instance" {
   storage_type                        = var.storage_type
   allocated_storage                   = var.allocated_storage
   multi_az                            = var.multi_az
-  db_subnet_group_name                = aws_db_subnet_group.mysql_subnet_group.name
+  db_subnet_group_name                = aws_db_subnet_group.rds_subnet_group.name
   publicly_accessible                 = false
   vpc_security_group_ids              = [aws_security_group.rds.id]
   port                                = 3306
   iam_database_authentication_enabled = false
   name                                = "testdb"
-  parameter_group_name                = aws_db_parameter_group.mysql_parameter_group.name
-  option_group_name                   = aws_db_option_group.mysql_option_group.name
+  parameter_group_name                = aws_db_parameter_group.rds_parameter_group.name
+  option_group_name                   = aws_db_option_group.rds_option_group.name
   auto_minor_version_upgrade          = false
   backup_retention_period             = 7
   backup_window                       = "19:00-20:00"
