@@ -1,9 +1,7 @@
 ##ACM
 resource "aws_acm_certificate" "cert" {
-  #domain_name = "*.${var.zone_name}"
-  domain_name = "*.onya-lab.site"
-  #subject_alternative_names = ["${var.zone_name}"]
-  subject_alternative_names = ["onya-lab.site"]
+  domain_name = "*.${var.zone_name}"
+  subject_alternative_names = ["${var.zone_name}"]
   validation_method         = "DNS"
 
   lifecycle {
@@ -26,6 +24,5 @@ resource "aws_route53_record" "cert_validation" {
   records         = [each.value.record]
   type            = each.value.type
   ttl             = "300"
-  #zone_id = aws_route53_zone.primary_zone.zone_id
-  zone_id = "Z07403921OYE516WPU79B"
+  zone_id = aws_route53_zone.primary_zone.zone_id
 }

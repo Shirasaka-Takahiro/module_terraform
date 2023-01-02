@@ -102,11 +102,11 @@ variable "key_name" {
 }
 
 ##Route53 Zone 
-#variable "zone_name" {
-#  description = "zone name of route53"
-#  type        = string
-#  default     = "shiratest.net"
-#}
+variable "zone_name" {
+  description = "zone name of route53"
+  type        = string
+  default     = "shiratest.net"
+}
 
 ##Route53 Records
 variable "sub_domain" {
